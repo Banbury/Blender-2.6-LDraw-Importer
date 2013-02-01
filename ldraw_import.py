@@ -34,7 +34,7 @@ import os, sys, math, mathutils
 
 import bpy
 from bpy_extras.io_utils import ImportHelper
-from bpy.props import * # TODO: Find what functions are being used and remove this universal import.
+import bpy.props
 
 
 # Global variables
@@ -50,7 +50,7 @@ MaxPath = 1024
 
 
 # Scans LDraw files     
-class ldraw_file (object):
+class ldraw_file(object):
 
     def __init__(self, filename, mat, colour = None):
         self.subfiles = []
