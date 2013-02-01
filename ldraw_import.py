@@ -232,10 +232,10 @@ def create_model(self, context):
                 if line[2:4].lower() == '!c':
                     line_split = line.split()
                     print(line, 'color ', line_split[4], 'code ', line_split[6][1:])
-                    colors[line_split[4]] = [ float (int ( line_split[6][1:3], 16) ) / 255.0, float (int ( line_split[6][3:5], 16) ) / 255.0, float 
-                    (int ( line_split[6][5:7], 16) ) / 255.0 ]
+                    colors[line_split[4]] = [float(int(line_split[6][1:3], 16)) / 255.0, float (int( line_split[6][3:5], 16)) / 255.0, float 
+                    (int(line_split[6][5:7], 16)) / 255.0]
                     
-        model = ldraw_file (file_name, mat)
+        model = ldraw_file(file_name, mat)
         # Removes doubles and recalculate normals in each brick. Model is super high-poly without it.
         for cur_obj in objects:
             bpy.context.scene.objects.active = cur_obj
