@@ -30,9 +30,7 @@ bl_info = {
                    "soon",
     "category": "Import-Export"}
 
-import os
-import math
-import mathutils
+import os, sys, math, mathutils
 
 import bpy
 from bpy_extras.io_utils import ImportHelper
@@ -44,8 +42,9 @@ file_list = {}
 mat_list = {}
 colors = {}
 scale = 1.0
-LDrawDir = "C:\Program Files (x86)\LDraw"
+LDrawDir = "C:\\LDraw"
 objects = []
+MAXPATH = 1024
 
 
 # Scans LDraw files     
@@ -169,7 +168,7 @@ def locate(pattern):
     if str.lower(os.path.split(fname)[0]) == 's' :
         isSubpart = True
     else:
-        isSubpart = False		
+        isSubpart = False       
 
     ldrawPath = os.path.join(LDrawDir, fname).lower()
     hiResPath = os.path.join(LDrawDir, "p", "48", fname).lower()
@@ -270,23 +269,19 @@ class IMPORT_OT_ldraw ( bpy.types.Operator, ImportHelper ):
     
     ## OPTIONS ##
     
-    ldraw_path = StringProperty( 
-        name="LDraw Path", 
-        description=("The path to your LDraw System of Tools installation."), 
-        default=LDrawDir,
-        update=get_path
-        )
-
-    ## DRAW ##
-    #def draw(self, context):
-    #   layout = self.layout
-        
-    #   box = layout.box()
-    #   box.label('Import Options:', icon='FILTER')
-# need to find a way to set the LDraw homedir interactivly -David Pluntze
-#       box.prop(self, 'ldraw_path')
+    ldrawPathProp = bpy.props.StringProperty(name="LDraw Path", description="The path to your LDraw System of Tools installation.", maxlen=MAXPATH, 
+    default={"win32": LDrawDir, "darwin": "/Library/LDraw"}.get(sys.platform, "/opt/ldraw"))
+    
+    #ldraw_path = StringProperty( 
+        #name="LDraw Path", 
+        #description=("The path to your LDraw System of Tools installation."), 
+        #default=LDrawDir,
+        #update=get_path
+        #)
 
     def execute(self, context):
+        global LDrawDir
+        LDrawDir = str(self.ldrawPathProp)
         print("executes\n")
         create_model(self, context)
         return {'FINISHED'}
