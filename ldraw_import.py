@@ -94,16 +94,15 @@ class ldraw_file(object):
     def parse_line(self, line):
         verts = []
 #       color = int(line[1])
-        num_points = int ( ( len(line) - 2 ) / 3 )
+        num_points = int (( len(line) - 2 ) / 3)
         #matrix = mathutils.Matrix(mat)
         for i in range(num_points):
-                self.points.append( ( self.mat * mathutils.Vector( ( float(line[i * 3 + 2]), float(line[i * 3 + 3]), float(line[i * 3 + 4]) ) ) ).
-                to_tuple() )
+                self.points.append((self.mat * mathutils.Vector((float(line[i * 3 + 2]), float(line[i * 3 + 3]), float(line[i * 3 + 4])))).
+                to_tuple())
                 verts.append(len(self.points)-1)
         self.faces.append(verts)
                 
-    def parse (self, filename):
-
+    def parse(self, filename):
         while True:
 #           file_found = True
             try:
@@ -138,7 +137,7 @@ class ldraw_file(object):
                             new_file = tmpdate[14]
                             x, y, z, a, b, c, d, e, f, g, h, i = map(float, tmpdate[2:14])
 #                           mat_new = self.mat * mathutils.Matrix( [[a, d, g, 0], [b, e, h, 0], [c, f, i, 0], [x, y, z, 1]] )
-                            mat_new = self.mat * mathutils.Matrix( ((a, b, c, x), (d, e, f, y), (g, h, i, z), (0, 0, 0, 1)) )
+                            mat_new = self.mat * mathutils.Matrix(((a, b, c, x), (d, e, f, y), (g, h, i, z), (0, 0, 0, 1)))
                             self.subfiles.append([new_file, mat_new, tmpdate[1]])
                             
                         # Triangle (tri)
@@ -176,10 +175,10 @@ def locate(pattern):
     partsPath = os.path.join(LDrawDir, "parts", fname).lower()
     partsSPath = os.path.join(LDrawDir, "parts", "s", fname).lower()
     UnofficialPath = os.path.join(LDrawDir, "unofficial", fname).lower()
-    UnofficialhiResPath = os.path.join(LDrawDir, "unofficial",  "p", "48", fname).lower()
-    UnofficialPrimPath = os.path.join(LDrawDir, "unofficial",  "p", fname).lower()
-    UnofficialPartsPath = os.path.join(LDrawDir, "unofficial",  "parts", fname).lower()
-    UnofficialPartsSPath = os.path.join(LDrawDir, "unofficial",  "parts", "s", fname).lower()
+    UnofficialhiResPath = os.path.join(LDrawDir, "unofficial", "p", "48", fname).lower()
+    UnofficialPrimPath = os.path.join(LDrawDir, "unofficial", "p", fname).lower()
+    UnofficialPartsPath = os.path.join(LDrawDir, "unofficial", "parts", fname).lower()
+    UnofficialPartsSPath = os.path.join(LDrawDir, "unofficial", "parts", "s", fname).lower()
     if os.path.exists(fname):
         pass
     elif os.path.exists(ldrawPath):
@@ -220,11 +219,11 @@ def create_model(self, context):
         
         # Set the initial transformation matrix, set the scale factor to 0.05 
         # and rotate -90 degrees around the x-axis, so the object is upright.
-        mat = mathutils.Matrix( ((1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0, 1)) ) * 0.05
+        mat = mathutils.Matrix(((1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0, 1))) * 0.05
         mat = mat * mathutils.Matrix.Rotation(math.radians(-90), 4, 'X')
  
         # Scan LDConfig to get the material color info.
-        ldconfig = open(locate("LDConfig.ldr" )[0])
+        ldconfig = open(locate("LDConfig.ldr")[0])
         ldconfig_lines = ldconfig.readlines()
         ldconfig.close()
         
@@ -258,7 +257,7 @@ def get_path(self, context):
     print(context)
     
 #----------------- Operator -------------------------------------------
-class IMPORT_OT_ldraw (bpy.types.Operator, ImportHelper):
+class IMPORT_OT_ldraw(bpy.types.Operator, ImportHelper):
     '''LDraw Importer Operator'''
     bl_idname = "import_scene.ldraw"
     bl_description = 'Import an LDraw model (.dat/.ldr)'
