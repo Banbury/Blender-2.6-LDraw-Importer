@@ -170,8 +170,9 @@ def locate(pattern):
         isSubpart = False  
 
     # Digest the content of LDrawDir.
-    #parts = {os.path.join(root, part).lower(): os.path.join(root, part)
-    #for root, _, files in os.walk(LDrawDir) for part in files}		
+    if sys.platform.startswith('linux'):
+        parts = {os.path.join(root, part).lower(): os.path.join(root, part)
+        for root, _, files in os.walk(LDrawDir) for part in files}  
 
     ldrawPath = os.path.join(LDrawDir, fname).lower()
     hiResPath = os.path.join(LDrawDir, "p", "48", fname).lower()
