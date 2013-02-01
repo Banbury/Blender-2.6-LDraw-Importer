@@ -167,7 +167,11 @@ def locate(pattern):
     if str.lower(os.path.split(fname)[0]) == 's' :
         isSubpart = True
     else:
-        isSubpart = False       
+        isSubpart = False  
+
+    # Digest the content of LDrawDir.
+    #parts = {os.path.join(root, part).lower(): os.path.join(root, part)
+    #for root, _, files in os.walk(LDrawDir) for part in files}		
 
     ldrawPath = os.path.join(LDrawDir, fname).lower()
     hiResPath = os.path.join(LDrawDir, "p", "48", fname).lower()
