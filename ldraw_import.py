@@ -42,7 +42,9 @@ file_list = {}
 mat_list = {}
 colors = {}
 scale = 1.0
-LDrawDir = "C:\\Program Files (x86)\\LDraw" # TODO: Change to "C:\\LDraw" before release
+WinLDrawDir = "C:\\Program Files (x86)\\LDraw" # TODO: Change to "C:\\LDraw" before release
+OSXLDrawDir = "/Library/LDraw" # TODO get default LDraw installation path
+LinuxLDrawDir = "/opt/ldraw" # TODO: Same as OSXLDrawDir
 objects = []
 MaxPath = 1024
 
@@ -161,7 +163,7 @@ def locate(pattern):
     '''Locate all files matching supplied filename pattern in and below
     supplied root directory.'''
     finds = []
-    fname = pattern.replace('\\', os.sep)
+    fname = pattern.replace('\\', os.path.sep)
     isPart = False
     if str.lower(os.path.split(fname)[0]) == 's' :
         isSubpart = True
@@ -235,7 +237,7 @@ def create_model(self, context):
                     (int ( line_split[6][5:7], 16) ) / 255.0 ]
                     
         model = ldraw_file (file_name, mat)
-# Restored and corrected 'Remove Doubles' and 'Recalculate Normals' code from V0.6.
+        # Removes doubles and recalculate normals in each brick. Model is super high-poly without it.
         for cur_obj in objects:
             bpy.context.scene.objects.active = cur_obj
             bpy.ops.object.editmode_toggle()
@@ -256,7 +258,7 @@ def get_path(self, context):
     print(context)
     
 #----------------- Operator -------------------------------------------
-class IMPORT_OT_ldraw ( bpy.types.Operator, ImportHelper ):
+class IMPORT_OT_ldraw (bpy.types.Operator, ImportHelper):
     '''LDraw Importer Operator'''
     bl_idname = "import_scene.ldraw"
     bl_description = 'Import an LDraw model (.dat/.ldr)'
@@ -265,12 +267,10 @@ class IMPORT_OT_ldraw ( bpy.types.Operator, ImportHelper ):
     bl_region_type = "WINDOW"
     bl_options = {'UNDO'}
     
-    ## OPTIONS ##
-	
-	ldrawPath = bpy.props.StringProperty(name = "LDraw Directory", description = "The folder path to your LDraw System of Tools installation."
+    ## Script Options ##
     
-    ldrawPathProp = bpy.props.StringProperty(name="LDraw Path", description="The path to your LDraw System of Tools installation.", maxlen=MAXPATH, 
-    default={"win32": LDrawDir, "darwin": "/Library/LDraw"}.get(sys.platform, "/opt/ldraw"))
+    ldrawPath = bpy.props.StringProperty(name = "LDraw Directory", description = "The folder path to your LDraw System of Tools installation.", maxlen = 1024,
+    default = {"win32": WinLDrawDir, "darwin": OSXLDrawDir}.get(sys.platform, LinuxLDrawDir), update = get_path)
     
     #ldraw_path = StringProperty( 
         #name="LDraw Path", 
@@ -281,7 +281,7 @@ class IMPORT_OT_ldraw ( bpy.types.Operator, ImportHelper ):
 
     def execute(self, context):
         global LDrawDir
-        LDrawDir = str(self.ldrawPathProp)
+        LDrawDir = str(self.ldrawPath)
         print("executes\n")
         create_model(self, context)
         return {'FINISHED'}
