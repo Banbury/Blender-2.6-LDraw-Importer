@@ -2,8 +2,8 @@ Blender 2.6 LDraw Importer
 ==========================
 Hello everybody! le717 here, reminding you that if you would like to learn more about this project, or donate code to it, you need to read this first.
 
-What Is This Script
--------------------
+History Lesson
+--------------
 
 This is a [Blender 2.6] (http://www.blender.org) Importer script for the [LDraw System of Tools's Brick Library.] (http://www.ldraw.org) 
 
@@ -14,7 +14,26 @@ This is a [Blender 2.6] (http://www.blender.org) Importer script for the [LDraw 
 There are many LDraw importer scripts for Blender 2.3 available, each one with its own errors and quirks, some that have even been lost over time due to dead 
 links. Many people have wanted an updated version of these scripts for a while, but nobody seemed to want to write one.
  
-However, David Pluntze did, and posted it [online] (http://projects.blender.org/tracker/index.php?func=detail&aid=30327&group_id=153&atid=467) on Febuary 23, 2012.
+However, David Pluntze did, and posted it [online] (http://projects.blender.org/tracker/index.php?func=detail&aid=30327&group_id=153&atid=467) on Febuary 23, 
+2012.
 However, the script, written for Blender 2.5, was in poor shape and was imcomplete. By the time I found it in early October 2012, Blender 2.6 was already 
-released, and the script would not even activate. I contacted my friend [JrMasterModelBuilder] (https://github.com/JrMasterModelBuilder) who corrected the script 
-for me, and allowed it to be used in Blender 2.6.
+released, and the script would not even activate. I contacted my friend [JrMasterModelBuilder] (https://github.com/JrMasterModelBuilder) who corrected the 
+script for me, and allowed it to be used in Blender 2.6.
+
+From then until January 2013, he and I tried to improve the script as much as possible. Many versions were released, and many bugs were fixed and identified. 
+However, since I knew very little Python, the process was a challenge.
+
+After putting off uploading the script to the web for anyone to improve, I finally uploaded here, on GitHub.
+
+Commit Guidelines
+-----------------
+
+There are a few guidelines that must be followed at all times when developing the Blender 2.6 LDraw Importer:
+
+* Backward compatibility
+
+* Blender script guidelines
+
+* Various branches
+
+*All explanations coming soon*
