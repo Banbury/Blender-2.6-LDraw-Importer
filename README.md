@@ -17,7 +17,7 @@ links. Many people have wanted an updated version of these scripts for a while, 
 However, David Pluntze did, and posted it [online] (http://projects.blender.org/tracker/index.php?func=detail&aid=30327&group_id=153&atid=467) on Febuary 23, 
 2012.
 However, the script, written for Blender 2.5, was in poor shape and was imcomplete. By the time I found it in early October 2012, Blender 2.6 was already 
-released, and the script would not even activate. I contacted my friend [JrMasterModelBuilder] (https://github.com/JrMasterModelBuilder) who corrected the 
+released, and the script would not even activate. I contacted my friend [JrMasterModelBuilder] (http://jrmastermodelbuilder.netai.net) who corrected the 
 script for me, and allowed it to be used in Blender 2.6.
 
 From then until January 2013, he and I tried to improve the script as much as possible. Many versions were released, and many bugs were fixed and identified. 
@@ -34,6 +34,10 @@ There are a few guidelines that must be followed at all times when developing th
 
 * Blender script guidelines
 
-* Various branches
+* Separate branches
+I've divided the project into three separate, distinct branches: master, unstable, and exporter.
+
+* The **master** branch is where stable, complete, mostly bug-free belongs. It is this code that will make up the next, official release. If one wanted to download the next release and not worry about it being broken, they would download from this branch.
+* The **unstable** branch is where all beta, draft, and buggy code belongs. Features that may be harder to implement or take longer to add go here so the master branch does not contain error code.
 
 *All explanations coming soon*

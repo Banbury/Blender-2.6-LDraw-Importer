@@ -43,7 +43,7 @@ mat_list = {}
 colors = {}
 scale = 1.0
 WinLDrawDir = "C:\\Program Files (x86)\\LDraw" # TODO: Change to "C:\\LDraw" before release
-OSXLDrawDir = "/Library/LDraw" # TODO get default LDraw installation path
+OSXLDrawDir = "/Applications/ldraw/" # TODO get default LDraw installation path
 LinuxLDrawDir = "/opt/ldraw" # TODO: Same as OSXLDrawDir
 objects = []
 MaxPath = 1024
@@ -172,49 +172,49 @@ def locate(pattern):
     # Digest the content of LDrawDir.
     if sys.platform.startswith('linux'):
         parts = {os.path.join(root, part).lower(): os.path.join(root, part)
-        for root, _, files in os.walk(LDrawDir) for part in files}  
+        for root, _, files in os.walk(LDrawDir) for part in files}
+    elif sys.platform.startswith('darwin') or sys.platform.startswith('win32'):
+        ldrawPath = os.path.join(LDrawDir, fname).lower()
+        hiResPath = os.path.join(LDrawDir, "p", "48", fname).lower()
+        primitivesPath = os.path.join(LDrawDir, "p", fname).lower()
+        partsPath = os.path.join(LDrawDir, "parts", fname).lower()
+        partsSPath = os.path.join(LDrawDir, "parts", "s", fname).lower()
+        UnofficialPath = os.path.join(LDrawDir, "unofficial", fname).lower()
+        UnofficialhiResPath = os.path.join(LDrawDir, "unofficial", "p", "48", fname).lower()
+        UnofficialPrimPath = os.path.join(LDrawDir, "unofficial", "p", fname).lower()
+        UnofficialPartsPath = os.path.join(LDrawDir, "unofficial", "parts", fname).lower()
+        UnofficialPartsSPath = os.path.join(LDrawDir, "unofficial", "parts", "s", fname).lower()
+        if os.path.exists(fname):
+            pass
+        elif os.path.exists(ldrawPath):
+            fname = ldrawPath
+        elif os.path.exists(hiResPath):
+            fname = hiResPath
+        elif os.path.exists(primitivesPath):
+            fname = primitivesPath
+        elif os.path.exists(partsPath):
+            fname = partsPath
+        elif os.path.exists(partsSPath):
+            fname = partsSPath
+        elif os.path.exists(UnofficialPath):
+            fname = UnofficialPath
+        elif os.path.exists(UnofficialhiResPath):
+            fname = UnofficialhiResPath
+        elif os.path.exists(UnofficialPrimPath):
+            fname = UnofficialPrimPath
+        elif os.path.exists(UnofficialPartsPath):
+            fname = UnofficialPartsPath
+        elif os.path.exists(UnofficialPartsSPath):
+            fname = UnofficialPartsSPath
+            if isSubpart == False:
+                isPart = True
+        else:
+            print("Could not find file %s" % fname)
+            return
 
-    ldrawPath = os.path.join(LDrawDir, fname).lower()
-    hiResPath = os.path.join(LDrawDir, "p", "48", fname).lower()
-    primitivesPath = os.path.join(LDrawDir, "p", fname).lower()
-    partsPath = os.path.join(LDrawDir, "parts", fname).lower()
-    partsSPath = os.path.join(LDrawDir, "parts", "s", fname).lower()
-    UnofficialPath = os.path.join(LDrawDir, "unofficial", fname).lower()
-    UnofficialhiResPath = os.path.join(LDrawDir, "unofficial", "p", "48", fname).lower()
-    UnofficialPrimPath = os.path.join(LDrawDir, "unofficial", "p", fname).lower()
-    UnofficialPartsPath = os.path.join(LDrawDir, "unofficial", "parts", fname).lower()
-    UnofficialPartsSPath = os.path.join(LDrawDir, "unofficial", "parts", "s", fname).lower()
-    if os.path.exists(fname):
-        pass
-    elif os.path.exists(ldrawPath):
-        fname = ldrawPath
-    elif os.path.exists(hiResPath):
-        fname = hiResPath
-    elif os.path.exists(primitivesPath):
-        fname = primitivesPath
-    elif os.path.exists(partsPath):
-        fname = partsPath
-    elif os.path.exists(partsSPath):
-        fname = partsSPath
-    elif os.path.exists(UnofficialPath):
-        fname = UnofficialPath
-    elif os.path.exists(UnofficialhiResPath):
-        fname = UnofficialhiResPath
-    elif os.path.exists(UnofficialPrimPath):
-        fname = UnofficialPrimPath
-    elif os.path.exists(UnofficialPartsPath):
-        fname = UnofficialPartsPath
-    elif os.path.exists(UnofficialPartsSPath):
-        fname = UnofficialPartsSPath
-        if isSubpart == False:
-            isPart = True
-    else:
-        print("Could not find file %s" % fname)
-        return
-
-    finds.append(fname)
-    finds.append(isPart)
-    return finds    
+        finds.append(fname)
+        finds.append(isPart)
+        return finds    
 
 # Create the actual model         
 def create_model(self, context):
