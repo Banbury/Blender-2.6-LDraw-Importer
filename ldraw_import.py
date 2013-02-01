@@ -237,14 +237,15 @@ def create_model(self, context):
                     
         model = ldraw_file(file_name, mat)
         # Removes doubles and recalculate normals in each brick. Model is super high-poly without it.
-        for cur_obj in objects:
-            bpy.context.scene.objects.active = cur_obj
-            bpy.ops.object.editmode_toggle()
-            bpy.ops.mesh.select_all(action='SELECT')
-            bpy.ops.mesh.remove_doubles()
-            bpy.ops.mesh.normals_make_consistent()
-            bpy.ops.object.mode_set(mode='OBJECT')
-            bpy.ops.object.mode_set()
+        if not CleanUp:
+            for cur_obj in objects:
+                bpy.context.scene.objects.active = cur_obj
+                bpy.ops.object.editmode_toggle()
+                bpy.ops.mesh.select_all(action='SELECT')
+                bpy.ops.mesh.remove_doubles()
+                bpy.ops.mesh.normals_make_consistent()
+                bpy.ops.object.mode_set(mode='OBJECT')
+                bpy.ops.object.mode_set()
        
     except:
         print("Oops. Something messed up.")
@@ -268,8 +269,11 @@ class IMPORT_OT_ldraw(bpy.types.Operator, ImportHelper):
     
     ## Script Options ##
     
-    ldrawPath = bpy.props.StringProperty(name = "LDraw Directory", description = "The folder path to your LDraw System of Tools installation.", maxlen = 1024,
+    ldrawPath = bpy.props.StringProperty(name = "LDraw Path", description = "The folder path to your LDraw System of Tools installation.", maxlen = 1024,
     default = {"win32": WinLDrawDir, "darwin": OSXLDrawDir}.get(sys.platform, LinuxLDrawDir), update = get_path)
+    
+    cleanupModel = bpy.props.BoolProperty(name = "Disable Model Cleanup", description = "Disable automatic removal of doubles and normal recalculation !NOT RECOMMENDED!", default = False)
+    
     
     #ldraw_path = StringProperty( 
         #name="LDraw Path", 
@@ -279,8 +283,9 @@ class IMPORT_OT_ldraw(bpy.types.Operator, ImportHelper):
         #)
 
     def execute(self, context):
-        global LDrawDir
+        global LDrawDir, CleanUp
         LDrawDir = str(self.ldrawPath)
+        CleanUp = bool(self.cleanupModel)
         print("executes\n")
         create_model(self, context)
         return {'FINISHED'}
