@@ -24,15 +24,11 @@ a:hover { text-decoration: underline; }
 </td>
 </tr>
 <tr>
+<td><a href="#Install">Installation</a>
+</td>
+</tr>
+<tr>
 <td><a href="#LDrawPath">Setting the LDraw Folder Path</a>
-</td>
-</tr>
-<tr>
-<td><a href="#WinInstall">Windows Installation Instructions</a>
-</td>
-</tr>
-<tr>
-<td><a href="#OSXInstall">Mac OS X Installation Instructions</a>
 </td>
 </tr>
 <tr>
@@ -63,31 +59,23 @@ This is the readme for the <span class="bold">Blender 2.6 LDraw</span> Importer 
 	<li><span class="bold">ldraw_import.py</span> (included with this download)</li>
 	<li><a href="http://www.ldraw.org/help/getting-started.html" title="LDraw System of Tools" target="_blank">LDraw System of Tools</a></li>
 	<li><a href="http://mlcad.lm-software.com/" title="MLCad" target="_blank">MLCad</a>, <a href="http://www.leocad.org/trac" title="LeoCAD" target="_blank">LeoCAD</a>, or <a href="http://bricksmith.sourceforge.net/" title="Bricksmith" target="_blank">Bricksmith</a> (all optional)</li>
-</ul><a name="LDrawPath"></a>
+</ul><a name="Install"></a>
 
+<h3 class="center">Installation</h3>
+
+<h4 class="center">Windows, OS X, Linux</h4>
+<ul>
+	<li>Open Blender, and click <span class="italic">File &gt; User Preferences &gt; Addons &gt; Install from File...</span></li>
+	<li>Browse for <span class="bold">ldraw_import.py</span>, and open it.</li>
+	<li>Find the script name in the list of Addons (search LDraw if you need), and tick the check mark to activate it.</li>
+	<li>If you want to load the script at all times, click the <span class="italic">Save as Default</span> button.</li><a name="LDrawPath"></a>
+</ul>
+	
 <h3 class="center">Setting the LDraw Folder Path</h3>
 <ul>
-	<li>On Windows, open <span class="bold">ldraw_import.py</span> in Notepad or <a href="http://notepad-plus-plus.org/" target="_blank" title="Notepad++">Notepad++</a>.
-On OS X, open the script in TextEdit (be sure to use plain text mode!), or <a href="http://www.barebones.com/products/textwrangler/" target="_blank" title="TextWrangler">TextWrangler</a>.</li><br>
-<li>Look for line 46, which will say<pre>LDrawDir = "C:\LDraw"</pre> Replace the text with the path to your LDraw System of Tools.</li>
- <li>Browse to the Blender 2.6 Python startup folder.</li><a name="WinInstall"></a>
-
-<h4 class="center">Windows</h4>
-	
-	<li>Depending on your version of Windows and Blender, the folder is located at
-	<pre>%ProgramFiles%\Blender version number\scripts\startup</pre>
-
-<strong>OR</strong>
-
-<pre>%ProgramFiles(x86)%\Blender version number\scripts\startup</pre></li><a name="OSXInstall"></a>
-
-<h4 class="center">Mac OS X</h4>
-	<li>Open Finder, click <span class="italic">Go > Go to Folder...</span>, and type <pre>~/Library/Application Support/Blender/Blender version number</pre></li>
-	<li>Click <span class="italic">File > Create Folder</span>, and create a folder called <span class="italic">scripts.</span></li>
-	<li>Create another folder called <span class="italic">startup</span> in the <span class="italic">scripts</span> folder.</li>
-	<li>Your folder path should look like <pre>~/Library/Application Support/Blender/Blender version number/scripts/startup</pre>
-	<li>Copy <span class="bold">ldraw_import.py</span> to this folder.
-	<br><br>
+	<li>Open Blender, and click <span class="italic">File &gt; Import &gt; LDraw Model (.dat/.ldr)</span></li>
+	<li>In the bottom left corner of your screen, under the <span class="bold">Import LDraw Model</span> header, there is a small field with the title <span class="bold">LDraw Path</span>. Modify the field with the proper folder path to your <span class="italic">LDraw System of Tools</span> installation path.</li>
+</ul>
 <p class="center">That's it! You have successfully installed the <span class="bold">Blender 2.6 LDraw Importer</span> script.</p>
 <a name="Changes"></a>
 
@@ -103,6 +91,7 @@ On OS X, open the script in TextEdit (be sure to use plain text mode!), or <a hr
 <li>Added ability to set LDraw System of Tools folder path from within Blender using code from <a href="https://github.com/impiaaa/blender-ldraw" target="_blank">Spencer Alves's Blender 2.6 LDraw Importer</a>.</li>
 <li>Added ability to disable automatic model cleanup (remove doubles and recalculate normals). Doing so is <strong>not advised.</strong></li>
 <li>Script cleanup</li>
+<li>Updated Readme with new information.</li>
 
 <h3>0.8 Beta 1</h3>
 
@@ -182,9 +171,9 @@ On OS X, open the script in TextEdit (be sure to use plain text mode!), or <a hr
 <h3>0.5</h3>
 
 (Released February 23, 2012)<br><br>
-<a name="Bugs"></a>
-<li>Original version by David Pluntze</li><a name="Bugs"></a>
 
+<li>Original version by David Pluntze</li>
+<a name="Bugs"></a>
 <h2 class="center">Known Bugs</h2><br> 
 <ol>
 <li>If a brick cannot be found, entire import stops.</li> 
