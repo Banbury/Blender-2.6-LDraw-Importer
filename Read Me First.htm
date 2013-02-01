@@ -96,11 +96,13 @@ On OS X, open the script in TextEdit (be sure to use plain text mode!), or <a hr
 
 <h3>0.8 Beta 2</h3>
 (Released ??, 2013)<br><br>
-<li>Uploaded source code to <a href="https://github.com/le717/Blender-2.6-LDraw-Importer" target="_blank">GitHub</a>. -le717</li>
-<li>Added partial patch from <a href="http://sourceforge.net/u/mss02/profile/" target="_blank">Marc Schmitt</a> on Sourceforge to somewhat allow the LDraw Folder path to be set from within Blender.</li>
+<li>Uploaded source code to <a href="https://github.com/le717/Blender-2.6-LDraw-Importer" title="https://github.com/le717/Blender-2.6-LDraw-Importer" target="_blank">GitHub</a>. -le717</li>
 <li>Switched to plain text version of GPL V2.</li>
 <li>Converted all whitespace to 4 spaces whitespace to conform to Python standards using Blender scripting scene.</li>
-<li>Added more of Marc's Linux patch, with minor changes.</li>
+<li>Added most of <a href="http://sourceforge.net/u/mss02/profile/" target="_blank">Marc Schmitt</a> Linux patch, with minor changes.</li>
+<li>Added ability to set LDraw System of Tools folder path from within Blender using code from <a href="https://github.com/impiaaa/blender-ldraw" target="_blank">Spencer Alves's Blender 2.6 LDraw Importer</a>.</li>
+<li>Added ability to disable automatic model cleanup (remove doubles and recalculate normals). Doing so is <strong>not advised.</strong></li>
+<li>Script cleanup</li>
 
 <h3>0.8 Beta 1</h3>
 
@@ -187,7 +189,8 @@ On OS X, open the script in TextEdit (be sure to use plain text mode!), or <a hr
 <ol>
 <li>If a brick cannot be found, entire import stops.</li> 
 <li>Bricksmith LDR files do not properly import, due to different layout than normal LDR files.</li>
-<li>Blender 2.65 crashes if user imports multiple models and available RAM is too low to continue. Can never be fixed, due to various computers with different amounds of RAM.</li> 
+<li>Blender crashes if user imports multiple models and available RAM is too low to continue. Can never be fixed, due to various computers with 
+different amounds of RAM.</li> 
 <li>Alpha colors are not supported.</li>
 <li>Find a way to set the LDraw Brick Library path in Blender itself.</li>
 <li>Rare bug where Blender 2.63 will not import any brick colors after already importing a model; may have already been fixed.</li>
@@ -197,9 +200,8 @@ On OS X, open the script in TextEdit (be sure to use plain text mode!), or <a hr
 <h2 class="center">Planned Features</h2><br> 
 <ol>
 <li>Write Linux installation instructions. (V0.8 Beta 2)</li>
-<li>Conform to standard Blender script API to be considered for official Blender adoption. See this <a href="http://www.blender.org/documentation/blender_python_api_2_65_release/info_best_practice.html" target="_blank">page</a> for more. (V0.8 All versions)</li>
+<li>Conform to standard Blender script API to be considered for official Blender adoption. See this <a href="http://www.blender.org/documentation/blender_python_api_2_65_release/info_best_practice.html" target="_blank">page</a> for more. (All versions)</li>
 <li>Do not stop entire import process if brick cannot be found, rather skip the brick and continue with import (V0.8 Beta 2)</li>
-<li>Create presets for LDraw Brick library path using  <a href="https://github.com/impiaaa/blender-ldraw" target="_blank">Spencer Alves's Blender 2.6 LDraw Importer</a> as a guide. (V0.8 Beta 2)</li>
 <li>Add the ability to properly import Bricksmith LDR models (V0.8 Final)</li>
 <li>Adapt the ability to import transparent and metallic colors from Spencer Alves's Blender 2.6 LDraw Importer on GitHub (V0.9)</li>
 <li>Perhaps create an EXE installer for Windows that would automatically install the script (V1.0+)</li>
@@ -208,7 +210,11 @@ On OS X, open the script in TextEdit (be sure to use plain text mode!), or <a hr
 
 <h2 class="center">Support</h2>
 <br>
-To submit bug reports or get the newest, bleeding-edge script, please go to <a href="https://github.com/le717/Blender-2.6-LDraw-Importer" title="https://github.com/le717/Blender-2.6-LDraw-Importer"  target="_blank">https://github.com/le717/Blender-2.6-LDraw-Importer</a>. To download the latest official releases, please visit <a href="http://sourceforge.net/projects/le717.u/files/Blender/Blender%202.6%20LDraw%20Importer/" title="http://sourceforge.net/projects/le717.u/files/Blender/Blender 2.6 LDraw Importer"  target="_blank">http://sourceforge.net/projects/le717.u/files/Blender/Blender 2.6 LDraw Importer</a><br><br>
+To submit bug reports or get the newest, bleeding-edge script, please go to <a href="https://github.com/le717/Blender-2.6-LDraw-Importer" title="
+https://github.com/le717/Blender-2.6-LDraw-Importer"  target="_blank">https://github.com/le717/Blender-2.6-LDraw-Importer</a>. To download the latest 
+official releases, please visit <a href="http://sourceforge.net/projects/le717.u/files/Blender/Blender%202.6%20LDraw%20Importer/" title="
+http://sourceforge.net/projects/le717.u/files/Blender/Blender 2.6 LDraw Importer"  target="_blank">
+http://sourceforge.net/projects/le717.u/files/Blender/Blender 2.6 LDraw Importer</a><br><br>
 
 <a class="ToC" href="#ToC">Back to the top</a>
 </body>
