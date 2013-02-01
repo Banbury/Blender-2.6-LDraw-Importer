@@ -42,9 +42,9 @@ file_list = {}
 mat_list = {}
 colors = {}
 scale = 1.0
-LDrawDir = "C:\\LDraw"
+LDrawDir = "C:\\Program Files (x86)\\LDraw" # TODO: Change to "C:\\LDraw" before release
 objects = []
-MAXPATH = 1024
+MaxPath = 1024
 
 
 # Scans LDraw files     
@@ -74,8 +74,6 @@ class ldraw_file (object):
             else:
                 mat_list[colour] = bpy.data.materials.new('Mat_'+colour+"_")
                 mat_list[colour].diffuse_color = colors[colour]
-                #mat_list[colour].use_nodes = True
-                # TODO: Add switch to Blender GUI to choose between nodes for Cycles and material color for Blender Internal. Or just else. Adding it this way for debugging purposes.
                 self.ob.data.materials.append(mat_list[colour])
                 
         # Link object to scene
@@ -268,6 +266,8 @@ class IMPORT_OT_ldraw ( bpy.types.Operator, ImportHelper ):
     bl_options = {'UNDO'}
     
     ## OPTIONS ##
+	
+	ldrawPath = bpy.props.StringProperty(name = "LDraw Directory", description = "The folder path to your LDraw System of Tools installation."
     
     ldrawPathProp = bpy.props.StringProperty(name="LDraw Path", description="The path to your LDraw System of Tools installation.", maxlen=MAXPATH, 
     default={"win32": LDrawDir, "darwin": "/Library/LDraw"}.get(sys.platform, "/opt/ldraw"))
