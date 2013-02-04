@@ -46,7 +46,6 @@ WinLDrawDir = "C:\\Program Files (x86)\\LDraw" # TODO: Change to "C:\\LDraw" bef
 OSXLDrawDir = "/Applications/ldraw/" # TODO get default LDraw installation path
 LinuxLDrawDir = "/opt/ldraw" # TODO: Same as OSXLDrawDir
 objects = []
-MaxPath = 1024
 
 
 # Scans LDraw files     
@@ -188,7 +187,7 @@ def locate(pattern):
             pass
         elif os.path.exists(ldrawPath):
             fname = ldrawPath
-        elif os.path.exists(hiResPath):
+        elif os.path.exists(hiResPath) and not HighRes:
             fname = hiResPath
         elif os.path.exists(primitivesPath):
             fname = primitivesPath
@@ -274,11 +273,12 @@ class IMPORT_OT_ldraw(bpy.types.Operator, ImportHelper):
     
     ## Script Options ##
     
-    ldrawPath = bpy.props.StringProperty(name = "LDraw Path", description = "The folder path to your LDraw System of Tools installation.", maxlen = 1024,
-    default = {"win32": WinLDrawDir, "darwin": OSXLDrawDir}.get(sys.platform, LinuxLDrawDir), update = get_path)
+    ldrawPath = bpy.props.StringProperty(name="LDraw Path", description="The folder path to your LDraw System of Tools installation.", maxlen=1024,
+    default = {"win32": WinLDrawDir, "darwin": OSXLDrawDir}.get(sys.platform, LinuxLDrawDir), update=get_path)
     
-    cleanupModel = bpy.props.BoolProperty(name = "Disable Model Cleanup", description = "Disable automatic removal of doubles and normal recalculation !NOT RECOMMENDED!", default = False)
-    
+    cleanupModel = bpy.props.BoolProperty(name="Disable Model Cleanup", description="Does not remove double vertices or make normals consistent.", default=False)
+
+    highresBricks = bpy.props.BoolProperty(name="Do Not Use High-res bricks", description="Do not use high-res bricks to import your model.", default=False) 
     
     #ldraw_path = StringProperty( 
         #name="LDraw Path", 
@@ -288,9 +288,10 @@ class IMPORT_OT_ldraw(bpy.types.Operator, ImportHelper):
         #)
 
     def execute(self, context):
-        global LDrawDir, CleanUp
+        global LDrawDir, CleanUp, HighRes
         LDrawDir = str(self.ldrawPath)
         CleanUp = bool(self.cleanupModel)
+        HighRes = bool(self.highresBricks)
         print("executes\n")
         create_model(self, context)
         return {'FINISHED'}

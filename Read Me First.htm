@@ -71,7 +71,7 @@ http://triangle717.wordpress.com" title="Triangle717" target="_blank">le717</a>,
 <ul>
 	<li>Open Blender, and click <span class="italic">File &gt; User Preferences &gt; Addons &gt; Install from File...</span></li>
 	<li>Browse for <span class="bold">ldraw_import.py</span>, and open it.</li>
-	<li>Find the script name in the list of Addons (search LDraw if you need), and tick the check mark to activate it.</li>
+	<li>Find the script name in the list of Addons (search for LDraw if needed), and tick the check mark to activate it.</li>
 	<li>If you want to load the script at all times, click the <span class="italic">Save as Default</span> button.</li><a name="LDrawPath"></a>
 </ul>
 	
@@ -95,12 +95,17 @@ http://triangle717.wordpress.com" title="Triangle717" target="_blank">le717</a>,
 "_blank">GitHub</a>. -le717</li>
 <li>Switched to plain text version of GPL V2.</li>
 <li>Converted all whitespace to 4 spaces whitespace to conform to Python standards using Blender scripting scene.</li>
-<li>Added most of <a href="http://sourceforge.net/u/mss02/profile/" target="_blank">Marc Schmitt</a> Linux patch, with minor changes.</li>
+<li>Added most of <a href="http://sourceforge.net/u/mss02/profile/" target="_blank">Marc Schmitt's</a> Linux patch, with minor changes.</li>
+<li>Made LDraw folder paths case-insensitive</li>
 <li>Added ability to set LDraw System of Tools folder path from within Blender using code from <a href="https://github.com/impiaaa/blender-ldraw" target=
 "_blank">Spencer Alves's Blender 2.6 LDraw Importer</a>.</li>
 <li>Added ability to disable automatic model cleanup (remove doubles and recalculate normals). Doing so is <strong>not advised.</strong></li>
-<li>Script cleanup</li>
+<li>Changed <code>dict()</code> to the proper <code>{}</code> syntax.</li>
+<li>Script cleanup.</li>
 <li>Updated Readme with new information.</li>
+<li>Added OS X and Linux LDraw System of Tools default installation path.</li>
+<li>Updated script options messages</li>
+<li>Added ability to disable use of high-res bricks.</li>
 </ul>
 
 <h3>0.8 Beta 1</h3>
@@ -208,7 +213,6 @@ different amounds of RAM.</li>
 
 <h2 class="center">Planned Features</h2><br> 
 <ol>
-<li>Write Linux installation instructions. (V0.8 Beta 2)</li>
 <li>Conform to standard Blender script API to be considered for official Blender adoption. See this <a href="
 http://www.blender.org/documentation/blender_python_api_2_65_release/info_best_practice.html" target="_blank">page</a> for more. (All versions)</li>
 <li>Do not stop entire import process if brick cannot be found, rather skip the brick and continue with import (V0.8 Beta 2)</li>
