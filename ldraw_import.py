@@ -42,9 +42,9 @@ file_list = {}
 mat_list = {}
 colors = {}
 scale = 1.0
-WinLDrawDir = "C:\\Program Files (x86)\\LDraw" # TODO: Change to "C:\\LDraw" before release
-OSXLDrawDir = "/Applications/ldraw/" # TODO get default LDraw installation path
-LinuxLDrawDir = "/opt/ldraw" # TODO: Same as OSXLDrawDir
+WinLDrawDir = "C:\\Program Files (x86)\\LDraw"
+OSXLDrawDir = "/Applications/ldraw/"
+LinuxLDrawDir = "~/ldraw/"
 objects = []
 
 
@@ -279,13 +279,6 @@ class IMPORT_OT_ldraw(bpy.types.Operator, ImportHelper):
     cleanupModel = bpy.props.BoolProperty(name="Disable Model Cleanup", description="Does not remove double vertices or make normals consistent.", default=False)
 
     highresBricks = bpy.props.BoolProperty(name="Do Not Use High-res bricks", description="Do not use high-res bricks to import your model.", default=False) 
-    
-    #ldraw_path = StringProperty( 
-        #name="LDraw Path", 
-        #description=("The path to your LDraw System of Tools installation."), 
-        #default=LDrawDir,
-        #update=get_path
-        #)
 
     def execute(self, context):
         global LDrawDir, CleanUp, HighRes
