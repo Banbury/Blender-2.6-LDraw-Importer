@@ -54,6 +54,8 @@ master branch does not contain error code. If someone wanted to download the new
 completion, and requires a large amount of new and rewritten code to use LDConfig.ldr and support modern LDraw guildelines to considered stable and be released 
 with the importer script.
 
+* The **unstable** branch is never to be merged into the **master** branch. When the changes made in the unstable is to be added into the master, you need to manually merge them and upload it.
+
 ### Official releases
 * For the time being, I will say when a official release of this project will happen, and it will be hosted on my personal [Sourceforge.net account] (
 http://sourceforge.net/projects/le717.u). In the future, the release cycle and download host will be changed, but it will stay as-is for now.
