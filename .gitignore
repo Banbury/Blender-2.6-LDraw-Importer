@@ -162,3 +162,9 @@ pip-log.txt
 
 # Mac junk
 .DS_Store
+
+#####
+Misc.
+#####
+*.py
+*.txt

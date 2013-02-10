@@ -270,6 +270,13 @@ class IMPORT_OT_ldraw(bpy.types.Operator, ImportHelper):
     bl_region_type = "WINDOW"
     bl_options = {'UNDO'}
     
+    filename_ext = "*.dat", "*.ldr"
+
+    filter_glob = bpy.props.StringProperty(
+            default="*.dat",
+            options={'HIDDEN'},
+            )
+    
     ## Script Options ##
     
     ldrawPath = bpy.props.StringProperty(name="LDraw Path", description="The folder path to your LDraw System of Tools installation.", maxlen=1024,
