@@ -227,17 +227,16 @@ def create_model(self, context):
         mat = mat * mathutils.Matrix.Rotation(math.radians(-90), 4, 'X')
  
         # Scan LDConfig to get the material color info.
-        ldconfig = open(locate("LDConfig.ldr")[0])
-        ldconfig_lines = ldconfig.readlines()
-        ldconfig.close()
+        with open(locate("LDConfig.ldr")[0]) as ldconfig:
+            ldconfig_lines = ldconfig.readlines()
         
-        for line in ldconfig_lines:
-            if len(line) > 3 :
-                if line[2:4].lower() == '!c':
-                    line_split = line.split()
-                    print(line, 'color ', line_split[4], 'code ', line_split[6][1:])
-                    colors[line_split[4]] = [float(int(line_split[6][1:3], 16)) / 255.0, float (int( line_split[6][3:5], 16)) / 255.0, float 
-                    (int(line_split[6][5:7], 16)) / 255.0]
+            for line in ldconfig_lines:
+                if len(line) > 3 :
+                    if line[2:4].lower() == '!c':
+                        line_split = line.split()
+                        print(line, 'color ', line_split[4], 'code ', line_split[6][1:])
+                        colors[line_split[4]] = [float(int(line_split[6][1:3], 16)) / 255.0, float (int( line_split[6][3:5], 16)) / 255.0, float 
+                        (int(line_split[6][5:7], 16)) / 255.0]
                     
         model = ldraw_file(file_name, mat)
         # Removes doubles and recalculate normals in each brick. Model is super high-poly without it.
