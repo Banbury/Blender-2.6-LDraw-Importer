@@ -21,7 +21,7 @@ bl_info = {
     "description": "Import LDraw models in .dat, and .ldr format",
     "author": "David Pluntze, JrMasterModelBuilder, le717",
     "version": (0, 8, 0),
-    "blender": (2, 6, 3),
+    "blender": (2, 63, 0),
     "api": 31236,
     "location": "File > Import",
     "warning": "A few bugs, otherwise fully functional script.",

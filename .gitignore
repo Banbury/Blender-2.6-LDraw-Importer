@@ -167,5 +167,5 @@ pip-log.txt
 Misc.
 #####
 
-*.txt
+#*.txt
 *.zip

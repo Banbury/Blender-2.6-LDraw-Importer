@@ -1,0 +1,1 @@
+So I can tell if I'm on the master or unstable branch without opening GitHub.
