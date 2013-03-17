@@ -44,7 +44,6 @@ file_list = {}
 mat_list = {}
 scale = 1.0
 LDrawDir = "~/ldraw/"
-mode_save = bpy.context.mode
 objects = []
 colors = {}
     
