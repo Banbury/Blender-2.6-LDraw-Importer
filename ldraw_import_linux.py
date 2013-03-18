@@ -276,7 +276,7 @@ class IMPORT_OT_ldraw ( bpy.types.Operator, ImportHelper ):
 	ldraw_path = StringProperty( 
 		name="LDraw Home directory", 
 		description=( "The directory where LDraw is installed to." ), 
-		default="C:\LDraw", subtype="DIR_PATH",
+		default=LDrawDir, subtype="DIR_PATH",
 		update=get_path
 		)
 
