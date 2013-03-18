@@ -17,14 +17,14 @@
 # ##### END GPL LICENSE BLOCK #####
 
 bl_info = {
-	"name": "Blender 2.6 LDraw Importer 0.8 Beta 1.1",
+	"name": "Blender 2.6 LDraw Importer 0.8 Beta 1.1 - Linux Build",
 	"description": "Import LDraw models in .dat, and .ldr format",
 	"author": "David Pluntze, JrMasterModelBuilder, le717",
 	"version": (0, 8, 0),
 	"blender": (2, 6, 3),
 	"api": 31236,
 	"location": "File > Import",
-	"warning": "A few bugs, otherwise fully functional script.",
+	"warning": "Experiential build for the Linux port of Blender ONLY",
 	"wiki_url": "http://wiki.blender.org/index.php/Extensions:2.6/Py/Scripts/Import-Export/LDRAW_Importer",
 	"tracker_url": "not"
 				   "never",
@@ -43,7 +43,7 @@ from bpy.props import *
 file_list = dict()
 mat_list = dict()
 scale = 1.0
-LDrawDir = "C:\LDraw"
+LDrawDir = "~/ldraw/"
 objects = []
 colors = dict()
 	
