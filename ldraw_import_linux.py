@@ -186,26 +186,26 @@ def locate( pattern ):
     
 	if os.path.exists(fname):
 		pass
-	elif os.path.exists(ldrawPath):
-		fname = ldrawPath
-	elif os.path.exists(hiResPath):
-		fname = hiResPath
-	elif os.path.exists(primitivesPath):
-		fname = primitivesPath
-	elif os.path.exists(partsPath):
-		fname = partsPath
-	elif os.path.exists(partsSPath):
-		fname = partsSPath
-	elif os.path.exists(UnofficialPath):
-		fname = UnofficialPath
-	elif os.path.exists(UnofficialhiResPath):
-		fname = UnofficialhiResPath
-	elif os.path.exists(UnofficialPrimPath):
-		fname = UnofficialPrimPath
-	elif os.path.exists(UnofficialPartsPath):
-		fname = UnofficialPartsPath
-	elif os.path.exists(UnofficialPartsSPath):
-		fname = UnofficialPartsSPath
+	elif ldrawPath in parts:
+		fname = parts[ldrawPath]
+	elif hiResPath in parts:
+		fname = parts[hiResPath]
+	elif primitivesPath in parts:
+		fname = parts[primitivesPath]
+	elif partsPath in parts:
+		fname = parts[partsPath]
+	elif partsSPath in parts:
+		fname = parts[partsSPath]
+	elif UnofficialPath in parts:
+		fname = parts[UnofficialPath]
+	elif UnofficialhiResPath in parts:
+		fname = parts[UnofficialhiResPath]
+	elif UnofficialPrimPath in parts:
+		fname = parts[UnofficialPrimPath]
+	elif UnofficialPartsPath in parts:
+		fname = parts[UnofficialPartsPath]
+	elif UnofficialPartsSPath in parts:
+		fname = parts[UnofficialPartsSPath]
 		if isSubpart == False:
 			isPart = True
 	else:
