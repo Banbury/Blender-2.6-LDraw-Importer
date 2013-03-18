@@ -174,15 +174,15 @@ def locate( pattern ):
         for root, _, files in os.walk(LDrawDir) for part in files}
 
     ldrawPath = os.path.join(LDrawDir, fname).lower()
-    hiResPath = os.path.join(LDrawDir, "P", "48", fname).lower()
-    primitivesPath = os.path.join(LDrawDir, "P", fname).lower()
-    partsPath = os.path.join(LDrawDir, "PARTS", fname).lower()
-    partsSPath = os.path.join(LDrawDir, "PARTS", "S", fname).lower()
-    UnofficialPath = os.path.join(LDrawDir, "UNOFFICIAL", fname).lower()
-    UnofficialhiResPath = os.path.join(LDrawDir, "UNOFFICIAL",  "P", "48", fname).lower()
-    UnofficialPrimPath = os.path.join(LDrawDir, "UNOFFICIAL",  "P", fname).lower()
-    UnofficialPartsPath = os.path.join(LDrawDir, "UNOFFICIAL",  "PARTS", fname).lower()
-    UnofficialPartsSPath = os.path.join(LDrawDir, "UNOFFICIAL",  "PARTS", "S", fname).lower()
+    hiResPath = os.path.join(LDrawDir, "p", "48", fname).lower()
+    primitivesPath = os.path.join(LDrawDir, "p", fname).lower()
+    partsPath = os.path.join(LDrawDir, "parts", fname).lower()
+    partsSPath = os.path.join(LDrawDir, "parts", "s", fname).lower()
+    UnofficialPath = os.path.join(LDrawDir, "unofficial", fname).lower()
+    UnofficialhiResPath = os.path.join(LDrawDir, "unofficial",  "p", "48", fname).lower()
+    UnofficialPrimPath = os.path.join(LDrawDir, "unofficial",  "p", fname).lower()
+    UnofficialPartsPath = os.path.join(LDrawDir, "unofficial",  "parts", fname).lower()
+    UnofficialPartsSPath = os.path.join(LDrawDir, "unofficial",  "parts", "s", fname).lower()
 
     if os.path.exists(fname):
         pass
