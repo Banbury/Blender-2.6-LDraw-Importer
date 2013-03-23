@@ -19,7 +19,7 @@
 bl_info = {
     "name": "Blender 2.6 LDraw Importer 0.8 Beta 2",
     "description": "Import LDraw models in .dat, and .ldr format",
-    "author": "David Pluntze, JrMasterModelBuilder, le717",
+    "author": "David Pluntze, JrMasterModelBuilder, Triangle717",
     "version": (0, 8, 0),
     "blender": (2, 63, 0),
     "api": 31236,
@@ -33,8 +33,9 @@ bl_info = {
 import os, sys, math, mathutils
 
 import bpy
+# import bpy.props
 from bpy_extras.io_utils import ImportHelper
-import bpy.props
+
 
 
 # Global variables
@@ -65,7 +66,15 @@ class ldraw_file(object):
         self.ob = bpy.data.objects.new('LDrawObj', self.me)
         self.ob.name = os.path.basename(filename)
         
-        self.ob.location = (0,0,0)
+        # TODO: If origin to geometry switch will not work here, where will it work?
+        # Always reset 3D cursor to <0,0,0>
+        bpy.context.scene.cursor_location = (0.0, 0.0, 0.0)
+        # if not CenterMesh:
+            # bpy.ops.object.origin_set(type='ORIGIN_GEOMETRY')         
+        # else:          
+            # bpy.ops.object.origin_set(type='ORIGIN_CURSOR')
+        
+        # self.ob.location = (0,0,0)
         
         if (colour is None):
             self.material = None
@@ -214,9 +223,9 @@ def locate(pattern):
         finds.append(fname)
         finds.append(isPart)
         return finds    
-
-# Create the actual model         
+     
 def create_model(self, context):
+    '''Creates the LDraw Model'''
     file_name = self.filepath
     print(file_name)
     try:
@@ -240,7 +249,7 @@ def create_model(self, context):
                     
         model = ldraw_file(file_name, mat)
         # Removes doubles and recalculate normals in each brick. Model is super high-poly without it.
-        if not CleanUp:
+        if CleanUp:
             for cur_obj in objects:
                 bpy.context.scene.objects.active = cur_obj
                 bpy.ops.object.editmode_toggle()
@@ -248,7 +257,7 @@ def create_model(self, context):
                 bpy.ops.mesh.remove_doubles()
                 bpy.ops.mesh.normals_make_consistent()
                 bpy.ops.object.mode_set(mode='OBJECT')
-                bpy.ops.object.mode_set()
+                # bpy.ops.object.mode_set()
        
     except:
         print("Oops. Something messed up.")
@@ -257,6 +266,7 @@ def create_model(self, context):
     print ("Import complete!")
 
 def get_path(self, context):
+    '''TODO: Find out what this does'''
     print(self)
     print(context)
     
@@ -272,18 +282,24 @@ class IMPORT_OT_ldraw(bpy.types.Operator, ImportHelper):
        
     ## Script Options ##
     
-    ldrawPath = bpy.props.StringProperty(name="LDraw Path", description="The folder path to your LDraw System of Tools installation.", maxlen=1024,
+    ldrawPath = bpy.props.StringProperty(name="LDraw Path", description="The folder path to your LDraw System of Tools installation",
     default = {"win32": WinLDrawDir, "darwin": OSXLDrawDir}.get(sys.platform, LinuxLDrawDir), update=get_path)
     
-    cleanupModel = bpy.props.BoolProperty(name="Disable Model Cleanup", description="Does not remove double vertices or make normals consistent.", default=False)
+    cleanupModel = bpy.props.BoolProperty(name="Enable Model Cleanup", description="Remove double vertices and make normals consistent", default=True)
 
-    highresBricks = bpy.props.BoolProperty(name="Do Not Use High-res bricks", description="Do not use high-res bricks to import your model.", default=False) 
-
+    highresBricks = bpy.props.BoolProperty(name="Do Not Use High-res bricks", description="Do not use high quality bricks to import your model", default=False) 
+    
+    origin_to_mesh = bpy.props.BoolProperty(name="Set Origin to Geometry", description="Set origin to model geometry instead of <0,0,0>", default=False)
+    
+    link_not_duplicate = bpy.props.BoolProperty(name="Link Alike Mesh", description='''Link alike bricks instead of dupliating then. ADVANCED USAGE ONLY''', default=False)
+    
     def execute(self, context):
         global LDrawDir, CleanUp, HighRes
         LDrawDir = str(self.ldrawPath)
         CleanUp = bool(self.cleanupModel)
         HighRes = bool(self.highresBricks)
+        CenterMesh = bool(self.origin_to_mesh)
+        LinkBrick = bool(self.link_not_duplicate)
         print("executes\n")
         create_model(self, context)
         return {'FINISHED'}
