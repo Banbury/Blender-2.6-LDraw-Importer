@@ -216,6 +216,13 @@ def locate(pattern):
             fname = UnofficialPartsSPath
             if isSubpart == False:
                 isPart = True
+                
+        elif fname in bpy.data.objects:
+            # Don't reimport brick if it is already inmported
+            fname = deepcopy(bpy.data.objects[fname])
+            bpy.context.scene.objects.link(fname)
+            
+           
         else:
             print("Could not find file %s" % fname)
             return
@@ -224,6 +231,20 @@ def locate(pattern):
         finds.append(isPart)
         return finds    
      
+def deepcopy(o):
+    '''Supposedly copies an already imported brick and all children, links children to current scene, but not parent.
+    However, the jury is still out on this one.
+    Code taken from 
+    https://github.com/impiaaa/blender-ldraw'''
+
+    p = o.copy()
+    if o in objectsInherit: objectsInherit.append(p)
+    for c in o.children:
+        d = deepcopy(c)
+        bpy.context.scene.objects.link(d)
+        d.parent = p
+    return p
+    
 def create_model(self, context):
     '''Creates the LDraw Model'''
     file_name = self.filepath
