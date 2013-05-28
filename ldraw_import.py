@@ -219,7 +219,7 @@ def locate(pattern):
                 
         elif fname in bpy.data.objects:
             # Don't reimport brick if it is already inmported
-            fname = deepcopy(bpy.data.objects[fname])
+            fname = copy_brick(bpy.data.objects[fname])
             bpy.context.scene.objects.link(fname)
             
            
@@ -231,7 +231,7 @@ def locate(pattern):
         finds.append(isPart)
         return finds    
      
-def deepcopy(o):
+def copy_brick(o):
     '''Supposedly copies an already imported brick and all children, links children to current scene, but not parent.
     However, the jury is still out on this one.
     Code taken from 
