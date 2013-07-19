@@ -3,7 +3,7 @@ bl_info = {
     "description": "",
     "author": "",
     "version": (0, 0, 1),
-    "blender": (2, 6, 3),
+    "blender": (2, 63, 0),
     "api": 717,
     "location": "File > Export",
     "warning": "First test",
