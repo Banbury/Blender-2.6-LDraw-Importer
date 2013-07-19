@@ -162,3 +162,11 @@ pip-log.txt
 
 # Mac junk
 .DS_Store
+
+#####
+Misc.
+#####
+
+#*.txt
+*.zip
+blender_python_reference_*/
