@@ -30,20 +30,21 @@ bl_info = {
                    "soon",
     "category": "Import-Export"}
 
-import os, sys, math, mathutils
+import os
+import sys
+import math
+import mathutils
 
 import bpy
 # import bpy.props
 from bpy_extras.io_utils import ImportHelper
-
-
 
 # Global variables
 file_list = {}
 mat_list = {}
 colors = {}
 scale = 1.0
-WinLDrawDir = "C:\\Program Files (x86)\\LDraw"
+WinLDrawDir = "C:\\LDraw"
 OSXLDrawDir = "/Applications/ldraw/"
 LinuxLDrawDir = "~/ldraw/"
 objects = []
@@ -218,7 +219,7 @@ def locate(pattern):
                 isPart = True
                 
         elif fname in bpy.data.objects:
-            # Don't reimport brick if it is already inmported
+            # Don't reimport brick if it is already imported
             fname = copy_brick(bpy.data.objects[fname])
             bpy.context.scene.objects.link(fname)
             
@@ -264,7 +265,8 @@ def create_model(self, context):
                 if len(line) > 3 :
                     if line[2:4].lower() == '!c':
                         line_split = line.split()
-                        print(line, 'color ', line_split[4], 'code ', line_split[6][1:])
+                        #print(line, 'color ', line_split[4], 'code ', line_split[6][1:])
+                        # What on earth is going on here...
                         colors[line_split[4]] = [float(int(line_split[6][1:3], 16)) / 255.0, float (int( line_split[6][3:5], 16)) / 255.0, float 
                         (int(line_split[6][5:7], 16)) / 255.0]
                     
@@ -280,7 +282,7 @@ def create_model(self, context):
                 bpy.ops.object.mode_set(mode='OBJECT')
                 # bpy.ops.object.mode_set()
        
-    except:
+    except Exception:
         print("Oops. Something messed up.")
         pass
    
@@ -291,7 +293,46 @@ def get_path(self, context):
     print(self)
     print(context)
     
+def ldraw_path():
+    '''Stores the LDraw System of Tools installation path,
+    provides a default setting if it does not exist'''
+    path_file = "LDrawPath.txt"
+    if not os.path.exists(path_file):
+        with open(path_file, "wt") as f:
+            f.write(LDrawDir)
+        print("The LDraw Path is", LDrawDir)
+        print("The path was saved to", os.getcwd(), path_file)
+        
+    else:
+        with open(path_file, "rt") as f:
+            LDrawDir = f.read()
+            
+def locate_library():
+    addon_prefs = bpy.context.user_preferences.addons[__package__].preferences
+
+    # Use the system preference if its set.
+    ldraw_loc = addon_prefs.filepath_ldraw
+    if ldraw_loc:
+        if os.path.exists(ldraw_loc):
+            return ldraw_loc
+        else:
+            print("LDraw System of Tools was not found at {0}".format(ldraw_loc))       
+            raise OSError
+            
+    
 #----------------- Operator -------------------------------------------
+class LDrawPreferences(bpy.types.AddonPreferences):
+    bl_idname = __name__
+
+    filepath_ldraw = bpy.props.StringProperty(
+                name="LDraw Location",
+                description="Path to LDraw System of Tools",
+                subtype='FILE_PATH',
+                )
+    def draw(self, context):
+        layout = self.layout
+        layout.prop(self, "filepath_ldraw")
+        
 class IMPORT_OT_ldraw(bpy.types.Operator, ImportHelper):
     '''LDraw Importer Operator'''
     bl_idname = "import_scene.ldraw"
@@ -303,8 +344,10 @@ class IMPORT_OT_ldraw(bpy.types.Operator, ImportHelper):
        
     ## Script Options ##
     
-    ldrawPath = bpy.props.StringProperty(name="LDraw Path", description="The folder path to your LDraw System of Tools installation",
-    default = {"win32": WinLDrawDir, "darwin": OSXLDrawDir}.get(sys.platform, LinuxLDrawDir), update=get_path)
+    #ldrawPath = bpy.props.StringProperty(name="LDraw Path", description="The folder path to your LDraw System of Tools installation",
+    #default = {"win32": WinLDrawDir, "darwin": OSXLDrawDir}.get(sys.platform, LinuxLDrawDir), update=get_path)
+    
+    #ldraw_path()
     
     cleanupModel = bpy.props.BoolProperty(name="Enable Model Cleanup", description="Remove double vertices and make normals consistent", default=True)
 
@@ -312,11 +355,12 @@ class IMPORT_OT_ldraw(bpy.types.Operator, ImportHelper):
     
     origin_to_mesh = bpy.props.BoolProperty(name="Set Origin to Geometry", description="Set origin to model geometry instead of <0,0,0>", default=False)
     
-    link_not_duplicate = bpy.props.BoolProperty(name="Link Alike Mesh", description='''Link alike bricks instead of dupliating then. ADVANCED USAGE ONLY''', default=False)
+    link_not_duplicate = bpy.props.BoolProperty(name="Link Alike Mesh", description="Link alike bricks instead of duplicating then. ADVANCED USAGE ONLY", default=False)
     
     def execute(self, context):
         global LDrawDir, CleanUp, HighRes
-        LDrawDir = str(self.ldrawPath)
+        LDrawDir = locate_library()
+        #LDrawDir = str(self.ldrawPath)
         CleanUp = bool(self.cleanupModel)
         HighRes = bool(self.highresBricks)
         CenterMesh = bool(self.origin_to_mesh)
